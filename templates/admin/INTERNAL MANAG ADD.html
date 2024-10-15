@@ -1,0 +1,79 @@
+{% extends 'admin/ADMIN HOME.html' %}
+{% block body %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+    <script src="/static/jquery.js"></script>
+    <script>
+    $(document).ready(function () {
+
+        $("#textfield3").change(function () {
+            ty=$(this).val();
+{#            alert(ty)#}
+            $.ajax({
+                url:'/ajax_email_already',
+                type:'POST',
+                data:{type:ty},
+                dataType:'json',
+                success:function (res) {
+{#                  alert(res.status);#}
+                  if(res.status=="ok")
+                  {
+
+                      document.getElementById("e").innerText="";
+
+
+                  }
+                  else
+                  {
+                      document.getElementById("textfield3").value="";
+                      document.getElementById("e").innerText="Email aleady exists";
+{#                      alert("already existing!")#}
+                  }
+
+                },
+                error:function (res) {
+
+                }
+
+            });
+
+        });
+
+    });
+    </script>
+</head>
+
+<body>
+<h2 align="center"  STYLE="color: white" style="font: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif">Internal Guide Add</h2>
+<form id="form1" name="form1" method="post" action="admin_add_internal_guide_post">
+    {% csrf_token %}
+    <br>
+  <table class="table table-light">
+    <tr>
+      <th width="116" scope="row">NAME</th>
+      <td width="68">
+      <input type="text" name="textfield" id="textfield2" class="form-control" required/></td>
+    </tr>
+    <tr>
+      <th scope="row">EMAIL</th>
+      <td>
+      <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="textfield2" id="textfield3" class="form-control" required />
+      <div id="e" style="color: red"></div>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">PHONE NO</th>
+      <td>
+      <input type="tel" pattern="[0-9]{10}" name="textfield3" id="textfield4" class="form-control" required/></td>
+    </tr>
+    <tr>
+      <td colspan="2" scope="row" align="center"><input type="submit" name="button" id="button" value="ADD" class="btn btn-outline-danger" /></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

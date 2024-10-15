@@ -1,0 +1,149 @@
+{% extends 'admin/ADMIN HOME.html' %}
+{% block body %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+
+
+<h2 align="center"  STYLE="color: white" style="font: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif">Group Add</h2>
+<form id="form1" onsubmit="return validate()" name="form1" method="post" action="/admin_group_management_add_post">
+{% csrf_token %}
+<BR>
+<table class="table table-light">
+
+  <tr>
+    <th scope="row">BATCH </th>
+    <td>
+      <select name="select" id="select" class="form-control" onchange="">
+{#      <select name="select" id="select" class="form-control" onchange="adds(this.value)">#}
+      <option>select</option>
+          {% for i in data %}
+          <option value="{{i.id}}">{{i.batch}}</option>
+          {% endfor %}
+      </select>
+    </td>
+  </tr>
+  <tr id="sub">
+    <th scope="row">GROUP NO</th>
+    <td id="sub">
+      <input type="text" name="textfield1" id="sub" class="form-control" value="{{ data5 }}" readonly required />
+    </td>
+  </tr>
+
+  <tr>
+    <th scope="row">INTERNAL GUIDE</th>
+    <td>
+      <select name="select2" id="select2" class="form-control" required>
+      <option>select</option>
+          {%for i in data2%}
+           <option value="{{i.id}}">{{i.ig_name}}</option>
+          {% endfor %}
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <th scope="row">EXTERNAL GUIDE</th>
+    <td>
+      <select name="select3" id="select3" class="form-control" required>
+      <option>select</option>
+          {% for i in data3 %}
+           <option value="{{i.id}}">{{ i.eg_name }}</option>
+          {% endfor %}
+
+      </select>
+    </td>
+  </tr>
+  <tr id="sub1">
+    <th scope="row">GROUP LEADER</th>
+    <td id="sub1">
+        <select name="textfield2" id="sub" class="form-control" required>
+             {% for i in data4 %}
+           <option value="{{i.id}}">{{ i.std_name }}</option>
+          {% endfor %}
+        </select>
+
+    </td>
+  </tr>
+
+
+  <tr>
+    <th scope="row">EMAIL (GROUP LEADER)</th>
+    <td>
+      <input type="email" name="textfield3" id="textfield3" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" required/>
+    </td>
+  </tr>
+
+ <tr>
+    <th scope="row">GROUP MEMBER 1</th>
+    <td>
+<select name="textfield4" id="sub" class="form-control" required>
+             {% for i in data4 %}
+           <option value="{{i.id}}">{{ i.std_name }}</option>
+          {% endfor %}
+        </select>    </td>
+  </tr>
+
+ <tr>
+    <th scope="row">GROUP MEMBER 2</th>
+    <td>
+<select name="textfield5" id="sub" class="form-control" required>
+             {% for i in data4 %}
+           <option value="{{i.id}}">{{ i.std_name }}</option>
+          {% endfor %}
+        </select>    </td>
+  </tr>
+
+
+  <tr>
+    <th scope="row">TOPIC NAME (If not finalised type NA)</th>
+    <td>
+      <input type="text" name="textfield6" id="textfield6" class="form-control" required/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" scope="row" align="center">
+      <input type="submit" name="button" id="button" value="ADD" class="btn btn-outline-danger"/>
+    </td>
+  </tr>
+</table>
+</form>
+<script src="/static/jquery.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#select").change(function () {
+           var bid=$("#select").val();
+           if(bid=="select"){
+               alert("Please choose a batch")
+           } else {
+
+           $.ajax({
+              type: "POST",
+              url: "/ajax_grp_batch",
+              data: {'bid' : bid},
+              cache: false,
+              success: function(data){
+                  grp_no=data['data'];
+                  sd=data['data1']
+                  $("#textfield2").val(grp_no);
+                  $("#textfield11").val(sd);
+              }
+            });
+           }
+        });
+    });
+    function validate(){
+        var batch=document.getElementById("select").value;
+        if(bacth=="select"){
+            alert("Please select a batch");
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>
+{% endblock %}

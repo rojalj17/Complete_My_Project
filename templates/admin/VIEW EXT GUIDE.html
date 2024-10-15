@@ -1,0 +1,58 @@
+{% extends 'admin/ADMIN HOME.html' %}
+{% block body %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h3 align="center"  STYLE="color: white" style="font: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif">External Guide View</h3>
+<form id="form1" name="form1" method="post" action="">
+<br>
+  <table align="right">
+    <tr>
+        <td ><a href="/admin_add_external_guide_get#cmp" class="btn btn-danger">ADD EXTERNAL GUIDE</a></td>
+      </tr>
+  </table>
+  <table class="table table-light">
+    <tr>
+      <th width="15" scope="col">#</th>
+      <th width="71" scope="col">Name</th>
+      <th width="44" scope="col">Posts</th>
+      <th width="124" scope="col">Company Address</th>
+      <th width="73" scope="col">Email</th>
+      <th width="56" scope="col">Phn No</th>
+      <th width="48" scope="col">&nbsp;</th>
+      <th width="75" scope="col">&nbsp;</th>
+
+
+
+    </tr>
+      {% for i in data %}
+
+
+
+    <tr>
+      <td>{{ forloop.counter }}&nbsp;</td>
+      <td>{{ i.eg_name }}&nbsp;</td>
+      <td>{{ i.eg_posts }}</td>
+      <td>&nbsp;{{ i.eg_company_name }}<br>{{ i.eg_place }}<br>{{ i.eg_post_office }}<br>{{ i.eg_pin }}</td>
+      <td>&nbsp;{{ i.eg_email }}</td>
+      <td>&nbsp;{{ i.eg_phone }}</td>
+
+      <td><a href="/admin_update_external_guide_get/{{ i.id }}#cmp" class="btn btn-outline-danger">EDIT</a></td>
+      <td><a href="/admin_external_guide_delete/{{ i.EG.id }}" class="btn btn-outline-danger" onclick="return confirm('Are You sure?')">DELETE</a></td>
+    </tr>
+      {% endfor %}
+
+ 
+
+   </table>
+</form>
+<p align="center">&nbsp;</p>
+<p align="center">&nbsp;</p>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'EXTERNAL GUIDE/EXTERNAL ORGANISATION HOME.html' %}
+{% block body %}
+
+<h2 align="center"  STYLE="color: white" style="font: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif">VIEW ATTENDANCE</h2>
+<form id="form1" name="form1" method="post" action="/external_view#cmp">
+{% csrf_token %}
+<br>
+  <table class="table table-light">
+
+    <tr>
+      <th width="184" scope="row">GROUP/TOPIC NAME</th>
+      <td width="217">
+        <select name="select2" id="select2"  class="form-control" required>
+        <option>select</option>
+            {% for i in grp %}
+            <option value="{{ i.id }}">{{ i.grp_number}}- {{ i.grp_topic_name}}</option>
+            {% endfor %}
+        </select></td>
+    </tr>
+
+    <tr>
+      <td colspan="2" scope="row" align="center"><input type="submit" name="button" id="button" value="SEARCH" class="btn btn-outline-danger"/></td>
+    </tr>
+
+  </table>
+</form><br>
+
+<h2 align="center" STYLE="color: white" style="font: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif>VIEW ATTENDANCE TABLE</h2>
+<form action="" method="get">
+<br>
+  <table border="1" class="table table-light">
+    <tr>
+      <th width="31" scope="col">#</th>
+              <th width="160" scope="col">DATE</th>
+
+      <th width="196" scope="col">ATTENDANCE</th>
+        <th></th>
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+              <td>{{ i.date_upload }}</td>
+
+      <td>{{ i.file }}</td>
+      <td></td>
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+{% endblock %}

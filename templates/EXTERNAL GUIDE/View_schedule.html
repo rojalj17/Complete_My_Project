@@ -1,0 +1,53 @@
+{% extends 'EXTERNAL GUIDE/EXTERNAL ORGANISATION HOME.html' %}
+{% block body %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h3 align="center" STYLE="color: white;font: 'Roboto,Lucida Grande, Verdana, Arial, sans-serif'" >Schedule View</h3>
+
+<form id="form1" name="form1" method="post" action="/external_view_schedule_post#cmp">
+{% csrf_token %}
+
+<table class="pull-right">
+    <tr>
+        <td>Batch</td>
+        <td>
+            <select name="select" id="select" class="form-control">
+                {% for i in data %}
+                    <option value="{{ i.id }}">{{ i.batch_name }}</option>
+                {% endfor %}
+            </select>
+        </td>
+        <td>
+            <input type="submit" class="btn btn-danger" value="Search"/>
+        </td>
+    </tr>
+</table>
+<BR>
+  <table class="table table-light">
+    <tr>
+      <th width="21" scope="col">ID</th>
+      <th width="79" scope="col">BATCH</th>
+      <th width="45" scope="col">NOTIFICATION</th>
+      <th width="42" scope="col">DATE</th>
+      <th width="41" scope="col">TIME</th>
+    </tr>
+       {% for i in data2 %}
+    <tr>
+      <td>{{ forloop.counter }}&nbsp;</td>
+      <td>{{ i.BATCH.batch }}</td>
+      <td>{{ i.note }}</td>
+      <td>&nbsp;{{ i.date }}</td>
+      <td>{{ i.time }}&nbsp;</td>
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

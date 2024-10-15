@@ -1,0 +1,47 @@
+{% extends 'admin/ADMIN HOME.html' %}
+{% block body %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h3  align="center" STYLE="color: white" style="font: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif">Student Management View</h3>
+<form id="form1" name="form1" method="post" action="">
+<BR>
+<table align="right">
+    <tr>
+        <td ><a href="/batch_add_student_get/{{ id }}#cmp" class="btn btn-danger">ADD STUDENTS</a></td>
+      </tr>
+  </table>
+  <table class="table table-light">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">NAME</th>
+        <th scope="col">REGISTER NUMBER</th>
+      <th scope="col">EMAIL</th>
+      <th scope="col">PHONE_NO</th>
+{#      <th scope="col">GROUP DETAILS</th>#}
+      <th scope="col">&nbsp;</th>
+      <th scope="col">&nbsp;  </th>
+{#        <th></th>#}
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td height="81">{{ forloop.counter }}</td>
+      <td>{{i.std_name}}</td>
+      <td>{{ i.std_regno }}&nbsp;</td>
+      <td>{{ i.std_email }}&nbsp;</td>
+      <td>&nbsp;{{ i.std_phone }}</td>
+{#      <td>{{ i.std_group_id.grp_topic_name }} (Group {{ i.std_group_id.grp_number }})</td>#}
+      <td><a href="/admin_update_batch_student_get/{{ i.id }}#cmp"class="btn btn-outline-danger">EDIT</a></td>
+      <td><a href="/admin_batch_student_delete/{{ i.id }}"class="btn btn-outline-danger" onclick="return confirm('Are You sure?')">DELETE</a></td>
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

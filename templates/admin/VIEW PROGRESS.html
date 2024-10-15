@@ -1,0 +1,123 @@
+{% extends 'admin/ADMIN HOME.html' %}
+{% block body %}
+
+    <script src="/static/jquery.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        var bid, gpid;
+
+        $("#select").change(function () {
+            bid = document.getElementById("select").value;
+            if (bid == "Select") {
+                alert("Choose batch")
+            } else {
+                grp_by_batch(bid)
+            }
+        });
+
+        $("#select2").change(function () {
+            gpid = document.getElementById("select2").value;
+            if (gpid == "Select") {
+                alert("Choose group")
+            } else {
+                att_by_grp(gpid)
+            }
+        });
+
+
+        function grp_by_batch(bid) {
+            $.ajax({
+                url: '/ajax_grp_by_batch',
+                type: 'post',
+                data: {bid: bid},
+                success: function (response) {
+                    console.log(response);
+                    $("#select2").empty();
+                    $("#select2").append("<option>Select</option>");
+
+                    var resp = response['data']
+                    var ln = resp.length;
+                    for (i = 0; i < ln; i++) {
+                        var id = resp[i]["id"];
+                        var grp_topic = resp[i]["grp_topic_name"];
+
+                        $("#select2").append("<option value='" + id + "'>" + grp_topic + "</option>");
+
+                    }
+                },
+                error: function (error) {
+                    console.log(error)
+                    alert("error   :   ", error)
+                }
+            });
+        }
+
+
+        function att_by_grp(grpid) {
+            $.ajax({
+                url: '/ajax_progress_by_group',
+                type: 'post',
+                data: {grpid: grpid},
+                success: function (response) {
+                    console.log(response);
+                    $("#t1").empty();
+                    $("#t1").append("<tr><th>#</th><th>Description</th><th>DATE</th><th>Remark</th></tr>");
+
+                    var resp = response['data']
+                    var ln = resp.length;
+                    for (i = 0; i < ln; i++) {
+                        var file = resp[i]["Description"];
+                        var date_upload = resp[i]["date_upload"];
+                        var remark = resp[i]["Remark"];
+
+                        var cnt = i + 1;
+
+                        $("#t1").append("<tr><td>" + cnt + "</td><td>"+file+"</td><td>" + date_upload + "</td><td>"+remark+"</td> </tr>");
+
+                    }
+                },
+                error: function (error) {
+                    console.log(error)
+                    alert("error   :   ", error)
+                }
+            });
+        }
+
+    })
+
+</script>
+<h2 align="center"  STYLE="color: white" style="font: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif">SEARCH PROGRESS</h2>
+<form id="form1" name="form1" method="post" action="/admin_progress_post#cmp">
+{% csrf_token %}
+<br>
+  <table class="table table-light">
+    <tr>
+      <th width="120" scope="row">BATCH</th>
+      <td width="108">
+
+        <select name="select" id="select"  class="form-control" required>
+         <option value="Select">Select</option>
+            {% for i in batches%}
+            <option value="{{ i.id }}">{{ i.batch }}</option>
+            {% endfor %}
+      </select></td>
+    </tr>
+    <tr>
+      <th scope="row">GROUP</th>
+      <td>
+        <select name="group" id="select2" class="form-control" required>
+      </select></td>
+    </tr>
+{#    <tr>#}
+{#      <td colspan="2" scope="row" align="center"><input type="submit" name="button" id="button" value="SEARCH" class="btn btn-outline-danger" /></td>#}
+{#    </tr>#}
+  </table>
+</form>
+
+<p>&nbsp;<h2 align="center" STYLE="color: white" style="font: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif">VIEW PROGRESS</h2>
+<form action="" method="get">
+<BR>
+  <table id="t1" class="table table-light">
+  </table>
+</form>
+{% endblock %}

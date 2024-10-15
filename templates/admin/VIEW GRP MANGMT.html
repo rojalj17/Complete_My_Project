@@ -1,0 +1,61 @@
+{% extends 'admin/ADMIN HOME.html' %}
+{% block body %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<H3 align="center"  STYLE="color: white" style="font: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif">Group View</H3>
+<form id="form1" name="form1" method="post" action="">
+<br>
+<table align="right">
+    <tr>
+        <td ><a href="/admin_group_management_add_get#cmp" class="btn btn-danger">ADD GROUP</a></td>
+      </tr>
+  </table>
+  <table class="table table-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">BATCH ID/NAME</th>
+      <th scope="col">GROUP NO</th>
+      <th scope="col">INTERNAL GUIDE</th>
+      <th scope="col">EXTERNAL GUIDE</th>
+      <th scope="col">GROUP LEADER</th>
+      <th scope="col">EMAIL</th>
+      <th scope="col">TOPIC NAME</th>
+      <th scope="col">&nbsp;</th>
+      <th scope="col">&nbsp;</th>
+        <th scope="col">&nbsp;</th>
+      <th scope="col">&nbsp;</th>
+      <th scope="col">&nbsp;</th>
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td>{{forloop.counter }}&nbsp;</td>
+      <td>{{i.GRP_BATCHID.batch }}</td>
+      <td>{{i.grp_number }}</td>
+      <td>{{i.GRP_IG.ig_name}}</td>
+      <td>{{ i.GRP_EG.eg_name }}&nbsp;</td>
+        <td>{{ i.grp_leader.std_name }}</td>
+      <td>{{ i.grp_email }}</td>
+
+      <td>&nbsp;{{ i.grp_topic_name }}</td>
+
+      <td><a href="/admin_update_group_management_get/{{ i.id }}#cmp"class="btn btn-outline-danger">EDIT</a></td>
+      <td><a href="/admin_group_management_delete/{{ i.id }}"class="btn btn-outline-danger" onclick="return confirm('Are You sure?')">DELETE</a></td>
+      <td><a href="/group_management_view_student/{{ i.id }}#cmp"class="btn btn-outline-danger">VIEW STUDENT</a></td>
+        <td><a href="/admin_view_circular/{{ i.id }}#cmp"class="btn btn-outline-danger">VIEW CIRCULAR</a></td>
+
+    <td><a href="/admin_view_scores/{{ i.id }}#cmp"class="btn btn-outline-danger">VIEW SCORE</a></td>
+
+    </tr>
+       {% endfor %}
+  </table>
+</form>
+<H3 align="center"  >&nbsp;</H3>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'EXTERNAL GUIDE/EXTERNAL ORGANISATION HOME.html' %}
+{% block body %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h3 align="center" STYLE="color: white;font: 'Roboto,Lucida Grande, Verdana, Arial, sans-serif'" >Circular View</h3>
+<br>
+<form id="form1" name="form1" method="post" action=""><table align="right">
+
+  </table>
+  <table class="table table-light">
+    <tr>
+      <th width="31" scope="row">Sno</th>
+
+      <td width="37"><b>DATE</b></td>
+      <td width="40"><b>TIME</b></td>
+      <td width="38"><b>NOTE</b></td>
+
+    </tr>
+      {% for i in data %}
+    <tr>
+
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.Date }}</td>
+      <td>&nbsp;{{ i.Time }}</td>
+      <td>&nbsp;{{ i.note }}</td>
+
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

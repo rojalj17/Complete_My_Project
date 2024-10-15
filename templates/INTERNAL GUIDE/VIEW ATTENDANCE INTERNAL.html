@@ -1,0 +1,26 @@
+{% extends 'INTERNAL GUIDE/INTERNAL ORGANISATION HOME.html' %}
+{% block body %}
+
+
+<h2 align="center" STYLE="color: white" style="font: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif">Attendance Table</h2>
+<form action="" method="get">
+<br>
+  <table class="table table-light">
+    <tr>
+      <th width="31" scope="col">#</th>
+              <th width="160" scope="col">DATE</th>
+
+
+      <th width="196" scope="col">ATTENDANCE</th>
+    </tr>
+      {% for i in bt %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+              <td>{{ i.date_upload }}</td>
+
+      <td>{{ i.file }}</td>
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+{% endblock %}

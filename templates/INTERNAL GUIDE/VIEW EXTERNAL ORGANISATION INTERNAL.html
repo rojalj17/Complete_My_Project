@@ -1,0 +1,39 @@
+{% extends 'INTERNAL GUIDE/INTERNAL ORGANISATION HOME.html' %}
+{% block body %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h3 align="center"  STYLE="color: white" style="font: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif">View External Guide</h3>
+<form id="form1" name="form1" method="post" action="">
+<br>
+  <table class="table table-light">
+    <tr>
+      <th width="15" scope="col">#</th>
+      <th width="71" scope="col">Name</th>
+      <th width="44" scope="col">Posts</th>
+      <th width="124" scope="col">Company Address</th>
+      <th width="73" scope="col">Email</th>
+      <th width="56" scope="col">Phn No</th>
+      
+    </tr>
+      {% for i in eg %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.eg_name }}</td>
+      <td>&nbsp;{{ i.eg_posts }}</td>
+      <td>{{ i.eg_company_name }}</td>
+      <td>{{ i.eg_email }}</td>
+      <td>&nbsp;{{ i.eg_phone }}</td>
+
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

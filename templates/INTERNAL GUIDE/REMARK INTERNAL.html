@@ -1,0 +1,29 @@
+{% extends 'INTERNAL GUIDE/INTERNAL ORGANISATION HOME.html' %}
+{% block body %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h1 align="center"  STYLE="color: white" style="font: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif">Remark</h1>
+<form action="/internal_progress_remark_post/{{ id }}" method="post">
+    {% csrf_token %}
+    <br>
+<table class="table table-danger">
+  <tr>
+    <th scope="col">REMARK</th>
+    <th scope="col">
+      <textarea rows="10" cols="30" name="textarea" class="form-control" required></textarea></th>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><input type="submit" name="button" id="button" value="ADD"  class="btn btn-outline-danger" /></td>
+    </tr>
+</table>
+</form>
+
+</body>
+</html>
+{% endblock %}

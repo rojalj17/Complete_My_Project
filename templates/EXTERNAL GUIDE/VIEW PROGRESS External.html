@@ -1,0 +1,50 @@
+
+{% extends 'EXTERNAL GUIDE/EXTERNAL ORGANISATION HOME.html' %}
+{% block body %}
+
+<h2 align="center" STYLE="color: white" style="font: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif">View Progress</h2>
+<form id="form1" name="form1" method="post" action="/external_view_progress_post#cmp">
+{% csrf_token %}
+<br>
+  <table class="table table-light">
+    <tr>
+      <th width="120" scope="row">GROUP/TOPIC NAME</th>
+      <td width="108">
+        <select name="select" id="select"   class="form-control" required>
+        <option>select</option>
+            {% for i in grp %}
+            <option value="{{ i.id }}">{{ i.grp_number}} {{ i.grp_topic_name}}</option>
+            {% endfor %}
+        </select></td>
+    </tr>
+
+    <tr>
+      <td colspan="2" scope="row" align="center"><input type="submit" name="button" id="button" value="SEARCH" class="btn btn-outline-danger"/></td>
+    </tr>
+  </table>
+</form>
+<p>&nbsp;</p>
+<h2 align="center" STYLE="color: white" style="font: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif">VIEW PROGRESS TABLE</h2>
+<form action="" method="get">
+<br>
+  <table class="table table-light">
+    <tr>
+      <th width="31" scope="col">#</th>
+
+      <th width="196" scope="col">DESCRIPTION</th>
+      <th width="160" scope="col">DATE</th>
+      <th width="160" scope="col">REMARK</th>
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td> {{ forloop.counter }}&nbsp;</td>
+        <td>{{ i.progress_file }}</td>
+
+
+      <td>&nbsp;{{ i.date_upload }}</td>
+    <td>{{ i.remark }}</td>
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+{% endblock %}

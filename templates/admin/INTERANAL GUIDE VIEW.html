@@ -1,0 +1,45 @@
+{% extends 'admin/ADMIN HOME.html' %}
+{% block body %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h2 align="center"  STYLE="color: white" style="font: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif">Internal Guide View</h2>
+<form id="form1" name="form1" method="post" action="">
+<BR>
+ <table align="right">
+     <tr>
+         <td><a href="/admin_add_internal_guide_get#cmp" class="btn btn-danger" >ADD INTERNAL GUIDE</a></td>
+      </tr>
+  </table>
+  <table class="table table-light">
+    <tr>
+      <th width="26" scope="col">#</th>
+      <th width="219" scope="col">NAME</th>
+      <th width="183" scope="col">EMAIL</th>
+      <th width="148" scope="col">PHONE</th>
+      <th width="99" scope="col">&nbsp;</th>
+      <th width="107" scope="col">&nbsp;</th>
+
+    </tr>
+      {% for i in data %}
+     
+
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.ig_name }}</td>
+      <td>{{ i.ig_email }}</td>
+        <td>{{ i.ig_phone }}</td>
+      <td><a href="/admin_update_internal_guide_get/{{ i.id }}#cmp" class="btn btn-outline-danger">EDIT</a></td>
+      <td><a href="/admin_Internal_guide_delete/{{ i.IG.id }}" class="btn btn-outline-danger" onclick="return confirm('Are You sure?')">DELETE</a></td>
+    </tr>
+     {% endfor %}
+
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}
